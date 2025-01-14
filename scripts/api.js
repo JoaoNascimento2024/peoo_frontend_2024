@@ -13,4 +13,4 @@ const post = async (url, data) => {
     });
 };
 
-export default {get , post};
+export {get , post};
