@@ -4,6 +4,7 @@ const get = async (url) => {
     const response = await fetch(url);
     return await response.json();
 };
+
 //Função genérica para realizar uma requisição POST
 const post = async (url, data) => {
     await fetch(url, {

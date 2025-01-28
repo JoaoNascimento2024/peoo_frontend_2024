@@ -1,13 +1,14 @@
 
 import { carregarQuantidadeProjetos } from "./dashboard.js";
+import { carregarProjetos } from "./projetos.js";
 
 const route = routeName => {
     switch(routeName){
         case "home":
             carregarQuantidadeProjetos();  
-        break;
+            break;
         case "projetos":
-            document.getElementById("app-content").innerHTML = "Projetos";
+            carregarProjetos();
             break;
         case "tarefas":
             document.getElementById("app-content").innerHTML = "Tarefas";
