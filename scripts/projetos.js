@@ -47,10 +47,12 @@ const renderizarListaProjetos = () => {
         `;
         document.getElementById("app-content").innerHTML = formulario;
 
-        document.getElementById("form-projeto").addEventListener("submit", (e) => {
+        document.getElementById("form-projeto").addEventListener("submit", async (e) => {
             e.preventDefault();
-            const projeto = { nome : document.getElementById("nome-projeto").value }
-            
+            const projeto = { nome : document.getElementById("nome-projeto").value }   
+            await post("http://localhost:5000/projetos", projeto);         
+            await carregarProjetos();
+            console.log({projeto})
         });
      })
 }
