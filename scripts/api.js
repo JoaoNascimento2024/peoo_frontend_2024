@@ -14,4 +14,22 @@ const post = async (url, data) => {
     });
 };
 
-export {get , post};
+//Função genérica para realizar uma requisição DELETE
+const del = async (url) => {
+    let response = await fetch(url, {
+        method: "DELETE",
+        headers: {"Content-Type": "application/json"}
+    });
+    return response;
+};
+
+const put = async (url, data) => {
+    let response = await fetch(url, {
+        method: "PUT",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    });
+    return response;
+}
+
+export {get , post, del, put};

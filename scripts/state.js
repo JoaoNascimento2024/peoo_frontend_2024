@@ -1,6 +1,6 @@
 const state = {
     projetos : [],
-    quantidadeProjetos : 0
+    categorias : []
 };
 
 export default state;

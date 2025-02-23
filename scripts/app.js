@@ -1,6 +1,7 @@
 
 import { carregarQuantidadeProjetos } from "./dashboard.js";
 import { carregarProjetos } from "./projetos.js";
+import { carregarCategorias } from "./categorias.js";
 
 const route = routeName => {
     switch(routeName){
@@ -10,8 +11,8 @@ const route = routeName => {
         case "projetos":
             carregarProjetos();
             break;
-        case "tarefas":
-            document.getElementById("app-content").innerHTML = "Tarefas";
+        case "categorias":
+            carregarCategorias();
             break;
         //default:
             //
