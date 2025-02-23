@@ -1,7 +1,9 @@
-
 import { carregarQuantidadeProjetos } from "./dashboard.js";
 import { carregarProjetos } from "./projetos.js";
 import { carregarCategorias } from "./categorias.js";
+
+import verificarAutenticacao from "./auth.js";
+verificarAutenticacao();
 
 const route = routeName => {
     switch(routeName){
@@ -14,11 +16,8 @@ const route = routeName => {
         case "categorias":
             carregarCategorias();
             break;
-        //default:
-            //
     }
 };
-
 
 const init = () => {
     document.querySelectorAll('[data-route]').forEach(link => {
@@ -29,8 +28,12 @@ const init = () => {
         route(routeName);
       })  
     })
-
     route("home");
 };
+
+document.getElementById("logout-link").addEventListener("click", () => {
+    localStorage.removeItem("token"); // Remove o token do localStorage
+    window.location.href = "login.html"; // Redireciona para a página de login
+});
 
 window.onload = init;

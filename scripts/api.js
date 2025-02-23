@@ -1,35 +1,60 @@
+const manipularResponse = async (response) => {
+    if (!response.ok) {
+        if (response.status === 401) {
+            // Redireciona para o login se o token for inválido ou expirado
+            localStorage.removeItem("token");
+            window.location.href = "login.html";
+            throw new Error("Sessão expirada. Faça login novamente.");
+        }
+        throw new Error(`Erro ${response.status}: ${response.statusText}`);
+    }
+    return response;
+};
 
-//Função genérica para realizar uma requisição GET
 const get = async (url) => {
     const response = await fetch(url);
     return await response.json();
 };
 
-//Função genérica para realizar uma requisição POST
 const post = async (url, data) => {
-    await fetch(url, {
-        method : "POST",
-        headers : {"Content-Type" : "application/json"},
+    const token = localStorage.getItem("token");
+    const response = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
         body: JSON.stringify(data)
     });
+    return manipularResponse(response);
 };
 
-//Função genérica para realizar uma requisição DELETE
 const del = async (url) => {
-    let response = await fetch(url, {
+    const token = localStorage.getItem("token");
+    const response = await fetch(url, {
         method: "DELETE",
-        headers: {"Content-Type": "application/json"}
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
     });
-    return response;
+    return manipularResponse(response);
 };
 
 const put = async (url, data) => {
-    let response = await fetch(url, {
+    const token = localStorage.getItem("token");
+    const response = await fetch(url, {
         method: "PUT",
-        headers: {"Content-Type": "application/json"},
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
         body: JSON.stringify(data)
     });
-    return response;
-}
+    return manipularResponse(response);
+};
 
-export {get , post, del, put};
+export { get, post, del, put };
